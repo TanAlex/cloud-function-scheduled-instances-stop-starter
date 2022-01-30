@@ -43,16 +43,24 @@ gcloud pubsub topics create start-instance-event
 gcloud pubsub topics create stop-instance-event
 ```
 
-### Deploy
+### (manual) Deploy, just for quick test
 ```
 gcloud functions deploy startInstanceFunc \
     --trigger-topic start-instance-event \
     --runtime nodejs10 \
-    --allow-unauthenticated
+    # --allow-unauthenticated
 gcloud functions deploy stopInstanceFunc \
     --trigger-topic stop-instance-event \
     --runtime nodejs10 \
-    --allow-unauthenticated
+    # --allow-unauthenticated
+```
+
+### Terraform Deploy
+```
+cd terraform
+terraform init
+terraform plan
+terraform apply
 ```
 
 ### Test
@@ -76,3 +84,4 @@ gcloud pubsub topics publish $TOPIC_ID \
 ZONE=northamerica-northeast1-a
 
 gcloud compute instances list --filter="labels.env=lab" --zones $ZONE --project $PROJECT
+```

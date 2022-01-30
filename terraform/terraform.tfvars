@@ -1,4 +1,4 @@
-project="th-ttanlab-lab-f7cf07"
+project="th-ttanlab-lab"
 region="northamerica-northeast1"
 cloud_func_bucket="ttanlab-func-bucket"
 cloud_func_service_account = "instance-cloud-func-sa"
