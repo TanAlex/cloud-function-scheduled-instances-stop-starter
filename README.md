@@ -67,9 +67,12 @@ terraform apply
 ```
 DATA=$(echo '{"zone":"northamerica-northeast1-a", "label":"env=lab"}' | base64)
 echo $DATA
+# note: you can't directly pass based64 to --data, 
+#       you need to use {"data": $DATA} to pass
 gcloud functions call stopInstanceFunc \
-    --data '{"zone":"northamerica-northeast1-a", "label":"env=lab"}'
+    --data '{"data":"'$DATA'"}'
 
+# or just publish to pubsub and let it to trigger
 DATA='{"zone":"northamerica-northeast1-a", "label":"env=lab"}'
 TOPIC_ID=StopInstanceTopic
 gcloud pubsub topics publish $TOPIC_ID \
@@ -81,7 +84,15 @@ gcloud pubsub topics publish $TOPIC_ID \
   --project $PROJECT \
   --message=$DATA 
 
+# This is to test your filter manually.
+# This instance list command will list all the instances that filter will get for you
 ZONE=northamerica-northeast1-a
-
 gcloud compute instances list --filter="labels.env=lab" --zones $ZONE --project $PROJECT
+```
+
+### NOTE
+
+Use commands like these to add tags to existing instances
+```
+gcloud compute instances add-labels example-instance --labels=k0=v0,k1=v1
 ```

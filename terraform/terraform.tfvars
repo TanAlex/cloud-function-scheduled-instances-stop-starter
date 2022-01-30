@@ -36,7 +36,7 @@ cloud_schedulers = {
         # schedule = "every 10 minutes"
         # everyday at 7:00AM PST"
         pubsub_topic = "StartInstanceTopic"
-        schedule   = "30 20 * * *"
+        schedule   = "00 07 * * *"
         time_zone  = "America/Vancouver"
         data  = {
             "zone" = "northamerica-northeast1-a", 
@@ -44,9 +44,9 @@ cloud_schedulers = {
         }
     }
     "StopInstanceScheduler" = {
-        # everyday at 8:20PM PST"
+        # everyday at 8:30PM PST"
         pubsub_topic = "StopInstanceTopic"
-        schedule   = "20 20 * * *"
+        schedule   = "30 20 * * *"
         time_zone  = "America/Vancouver"
         data  = {
             "zone" = "northamerica-northeast1-a", 
